@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1024" />
+  <title>An impressive presentation</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div id="impress">
+    <div class="step center" data-x="500" data-y="500">
+      Hello World!
+    </div>
+<!--
+    <div id="picture" class="step center" data-x="900" data-y="1200" data-z="-500" data-scale="1">
+      <img src="assets/nn1_3.png">
+    </div>
+  -->
+    <div class="step right formula" data-x="500" data-y="1000" data-z="0">
+        $$\delta_j^L = \frac{\partial C}{\partial z^L_j}$$    
+    </div>
+    <div class="step right formula" data-rel-y="200">
+        $$= \frac{\partial C}{\partial a^L_j} \frac{\partial a^L_j}{\partial z^L_j}$$
+    </div>
+    <div class="step right formula" data-rel-y="200">
+        $$= \frac{\partial}{\partial a^L_j} \frac{1}{2} (y_j - a^L_j)^2 \cdot \frac{\partial}{\partial z^L_j} \sigma(z^L_j)$$
+    </div>
+    <div class="step right formula" data-rel-y="200">
+        $$= (a^L_j - y_j) \cdot \sigma'(z^L_j)$$
+    </div>
+    <div id="ggb" class="step center" data-rel-y="1000">
+      <div id="ggb-element"></div> 
+    </div>
+  </div>
+
+
+  <script src="lib/impress.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  <script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
+
+  <script>
+    var api = impress();
+    api.init();
+
+    MathJax.Hub.Config({
+      displayAlign: "left"
+    });
+
+    var ggbApp = new GGBApplet({
+      filename: 'assets/3dtest.ggb', 
+      //appName: '3d',
+      enableRightClick: false,
+      width: 820,
+      height: 500
+    }, false);
+
+    ggbApp.setHTML5Codebase('https://app.geogebra.org/5.0/web3d/');
+
+    var rootElement = document.getElementById("impress");
+    rootElement.addEventListener("impress:stepenter", function(event) {
+      var currentStep = event.target;
+
+      if (currentStep.id == "ggb") {
+        //ggbApp.inject('ggb-element');
+      }
+    });
+
+    window.onload = function() {
+      //ggbApp.inject('ggb-element');
+    }
+  </script>
+</body>
+</html>
