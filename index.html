@@ -1,74 +1,176 @@
 <!doctype html>
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=1024" />
-  <title>An impressive presentation</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=1024" />
+        <title>An impressive presentation</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
 
-<body>
-  <div id="impress">
-    <div class="step center" data-x="500" data-y="500">
-      Hello World!
-    </div>
+    <body>
+        <div id="impress">
+            <div class="step center" data-x="500" data-y="500">
+                <h1>Artificiële Neurale Netwerken</h1>
+                <span class="small">Daan Vanoverloop</span>
+            </div>
 
-    <div id="picture" class="step center" data-x="900" data-y="1200" data-z="-500" data-scale="1">
-      <img src="assets/nn1_3.png">
-    </div>
-    <div class="step right formula" data-x="500" data-y="1000" data-z="0">
-        $$\delta_j^L = \frac{\partial C}{\partial z^L_j}$$    
-    </div>
-    <div class="step right formula" data-rel-y="200">
-        $$= \frac{\partial C}{\partial a^L_j} \frac{\partial a^L_j}{\partial z^L_j}$$
-    </div>
-    <div class="step right formula" data-rel-y="200">
-        $$= \frac{\partial}{\partial a^L_j} \frac{1}{2} (y_j - a^L_j)^2 \cdot \frac{\partial}{\partial z^L_j} \sigma(z^L_j)$$
-    </div>
-    <div class="step right formula" data-rel-y="200">
-        $$= (a^L_j - y_j) \cdot \sigma'(z^L_j)$$
-    </div>
-    <div id="ggb" class="step center" data-rel-y="1000">
-      <div id="ggb-element"></div> 
-    </div>
-  </div>
+            <div class="step left" data-x="1500" data-y="1500" data-rotate="90">
+                <h1>Motivatie</h1>
+                <ul>
+                    <li>Computer speelt computerspel</li>
+                    <li>Netwerk van neuronen</li>
+                </ul>
+            </div>
 
+            <div class="step left" data-rel-x="-1000" data-rotate="90">
+                <h1>Wat is een neuraal netwerk</h1>
+                <ul>
+                    <li>Biologisch vs artificiëel</li>
+                    <li>Verschillende lagen
+                        <ul>
+                            <li>invoer</li>
+                            <li>verborgen</li>
+                            <li>uitvoer</li>
+                        </ul>
+                    </li>
+                    <li>Bepaalde uitvoer voor elke invoer</li>
+                    <li>Vergelijkbaar met wiskundige functie</li>
+                </ul>
+            </div>
 
-  <script src="lib/impress.js"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
-  <script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
+            <div class="step left" data-rel-x="-1000" data-rotate="90">
+                <h1>Toepassingen backpropagation</h1>
+                <ul>
+                    <li>Handschrift ontcijferen</li>
+                    <li>Spraakherkenning</li>
+                </ul>
+                <p>=&gt; Gekende trainingsvoorbeelden</p>
+            </div>
 
-  <script>
-    var api = impress();
-    api.init();
+            <div class="step left" data-x="900" data-y="3400" data-z="-300">
+                <h1>Het perceptron</h1>
+                <img src="images/Perceptron.png" width="400px" />
+                <ul>
+                    <li>Invoer en gewichten zijn 2 vectoren</li>
+                    <li>
+                        Product van vectoren = gewogen som<br>
+                        $$s = W^T \cdot X = \sum_{j=1}^{n} w_j x_j$$
+                    </li>
+                    <li>
+                        Activatie:
+                        $$
+                        \begin{cases}
+                        0 &\quad\text{als } s \leq drempelwaarde \\
+                        1 &\quad\text{als } s > drempelwaarde
+                        \end{cases}
+                        $$
+                    </li>
+                    <li>Sigmoïdefunctie</li>
+                </ul>
+            </div>
 
-    MathJax.Hub.Config({
-      displayAlign: "left"
-    });
+            <div class="step left keep" data-x="1500" data-y="3300">
+                <img class="keep" src="images/nn1_3.png" style="position: absolute; margin-left: 500px;" width="400px" />
+                <h1>Een netwerk van neuronen</h1>
+                <ul>
+                    <li>
+                        Feedfoward algoritme<br>
+                        $$A^{(l)} = \sigma(W^{(l)} \cdot A^{(l-1)} + B^{(l)})$$
+                    </li>
+                </ul>
+            </div>
 
-    var ggbApp = new GGBApplet({
-      filename: 'assets/3dtest.ggb', 
-      //appName: '3d',
-      enableRightClick: false,
-      width: 820,
-      height: 500
-    }, false);
+            <div class="step left" data-x="2200" data-y="3400">
+                <h1 style="margin-left: 300px; margin-right: -300px;">Het berekenen van de kost</h1>
+                <ul style="margin-left: 300px; margin-right: -300px;">
+                    <li>Trainen aan de hand van gekende trainingsvoorbeelden </li>
+                    <li>Kwadratische kostfunctie: $$C(X) = \frac{||Y(X) - A^{(L)}(X)||^2}{2}$$</li>
+                    <li>Norm van verschil tussen uitvoer netwerk en gewenste uitvoer</li>
+                </ul>
+            </div>
 
-    ggbApp.setHTML5Codebase('https://app.geogebra.org/5.0/web3d/');
+            <div class="step left" data-y="4400">
+                <h1>Op zoek naar het minimum</h1>
+                <ul>
+                    <li>Hoe kost minimaliseren?</li>
+                    <li>Kostfunctie afleiden naar de gewichten en de biasen</li>
+                    <li>Hoe verandert de kost naarmate gewichten en biasen veranderen?</li>
+                    <li>Afgeleiden aftrekken om nieuwe gewichten/biasen te verkrijgen:<ul>
+                            <li>$$W&#39;^{(l)} = W^{(l)} - \eta \frac{\partial C}{\partial W^{(l)}}$$</li>
+                            <li>$$B&#39;^{(l)} = B^{(l)} - \eta \frac{\partial C}{\partial B^{(l)}}$$</li>
+                        </ul>
+                    </li>
+                    <li>Leersnelheid $$\eta$$</li>
+                </ul>
+            </div>
 
-    var rootElement = document.getElementById("impress");
-    rootElement.addEventListener("impress:stepenter", function(event) {
-      var currentStep = event.target;
+            <div class="step left" data-x="1500">
+                <h1>Backpropagation</h1>
+                <ul>
+                    <li>Door af te leiden vinden we:
+                        <ul>
+                            <li>Voor de fout van het laatste laag:
+                                <p>$$\delta^L = \frac{\partial C}{\partial z^L_j} = (A^{(L)} - Y) \odot \sigma'(Z^{(L)})$$</p>
+                            </li>
+                            <li>Voor de fout van de andere lagen:
+                                <p>$$\delta^l = \frac{\partial C}{\partial z^l_j} = ((W^{(l+1)})^T \delta^{l+1}) \odot \sigma'(Z^{(l)})$$</p>
+                            </li>
+                            <li>Voor de gewichten/biasen:
+                                <p>$$\frac{\partial C}{\partial B^{(l)}} = \delta^l$$</p>
+                                <p>$$\frac{\partial C}{\partial W^{(l)}} = \delta^l (A^{(l-1)})^T$$</p>
+                            </li>
+                        </ul>
+                    </li>
+                </ul><br>
+            </div>
 
-      if (currentStep.id == "ggb") {
-        //ggbApp.inject('ggb-element');
-      }
-    });
+            <div class="step left" data-z="900" data-y="3800" data-x="1900">
+                <h1>Formules samengevat</h1>
+                <ol>
+                    <li>Feedforward: uitvoer berekenen voor bepaalde invoer</li>
+                    <li>Kost berekenen met kwadratische kostfunctie</li>
+                    <li>Verandering van gewichten en biasen bepalen om kost te verlagen</li>
+                    <li>Nieuwe waarden van gewichten en biasen bepalen</li>
+                </ol>
+            </div>
 
-    window.onload = function() {
-      ggbApp.inject('ggb-element');
-    }
-  </script>
-</body>
+            <div class="step left" data-x="3000">
+                <h1>Andere trainingsmethoden</h1>
+                <ul>
+                    <li>NeuroEvolutie<ul>
+                            <li>NEAT algoritme</li>
+                            <li>Netwerk om games te spelen</li>
+                        </ul>
+                    </li>
+                    <li>Straffen en belonen</li>
+                    <li>Patronen herkennen</li>
+                </ul>
+            </div>
+
+            <div class="step left" data-x="4200">
+                <h1>Conclusie</h1>
+                <ul>
+                    <li>Bij groot aantal trainingsvoorbeelden: backpropagation</li>
+                    <li>Evolutie als het gewenste resultaat niet concreet bepaald is</li>
+                    <li>Toekomst?</li>
+                </ul>
+            </div>
+
+            <div class="step center" data-y="5000">
+                <h1>Bedankt voor jullie aandacht!</h1>
+            </div>
+
+        <script src="lib/impress.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+        <script>
+            var api = impress();
+            api.init();
+
+            MathJax.Hub.Config({
+                displayAlign: "left"
+            });
+        </script>
+    </body>
 </html>
